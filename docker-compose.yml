@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+  
+  php:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    volumes:
+      - ./phpScripts:/usr/src/myapp
+      - ./paginaWeb:/var/www/html
+    expose:
+      - 80
+    ports:
+      - 80:80
+  mariadb:
+    build:
+      context: ./importBBDD
+      dockerfile: Dockerfile
+    volumes:
+      - ./importBBDD:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=Nofre
+      - MYSQL_DATABASE=Proves
+      - MYSQL_USER=Nofre
+      - MYSQL_PASSWORD=Nofre
+    expose:
+      - 3306
+    ports:
+      - 3306:3306
+  
+  phpmyadmin:
+    image: phpmyadmin
+    environment:
+      - PMA_HOST=mariadb
+      - UPLOAD_LIMIT=300M
+    expose:
+      - 8083
+    ports:
+      - 8083:80
+  
+
+
+
+  
