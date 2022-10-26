@@ -7,16 +7,14 @@ services:
       context: ./
       dockerfile: Dockerfile
     volumes:
-      - ./php:/var/www/html
+      - ./php:/var/www/
     expose:
       - 80
     ports:
       - 80:80
 
   mariadb:
-    build:
-      context: ./importBBDD
-      dockerfile: Dockerfile
+    image: mariadb:10.7
     environment:
       - MYSQL_ROOT_PASSWORD=Nofre
       - MYSQL_DATABASE=Proves
