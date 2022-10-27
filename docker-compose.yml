@@ -22,6 +22,8 @@ services:
       - MYSQL_PASSWORD=Nofre
     expose:
       - 3306
+    volumes:
+      - ./importBBDD:/docker-entrypoint-initdb.d 
     ports:
       - 3306:3306
   
